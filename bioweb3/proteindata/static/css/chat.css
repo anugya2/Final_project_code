@@ -1,0 +1,140 @@
+/* # I wrote this code */
+body{
+    background-color: white;
+    margin: 25px;
+    padding: 25px;    
+    background-image: url(../images/texture.jpg);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+.innerBody{
+    background-color: rgba(255, 255, 255, 0.773);
+    margin:50px;
+    margin: 50px;
+    padding: 25px;
+    border-radius: 10px;
+    width: 85rem;
+}
+
+.logoBar{
+    display: flex;
+    flex-direction: row;
+    color: rgb(22,22,22);
+    font-weight: bolder;     
+    padding:5px;
+    align-items: center;
+    text-shadow: 2px 2px 2px whitesmoke;
+}
+
+#logo{
+    width:100px;
+    padding:10px;
+}
+
+.horizontal{
+    display:flex;
+    flex-direction: row;
+    padding: 10px;
+    margin: 10px;
+}
+
+.vertical{
+    display:flex;
+    flex-direction: column;
+    padding: 10px;
+    margin: 10px;
+}
+
+.card{
+    border-radius: 10px;
+    margin: 10px;
+    box-shadow: 10px 10px 3px grey;
+    margin-right: 20px;
+    margin-left: 20px;
+}
+
+.nav-link{
+    font-size: 25px;
+    color: white;
+    border-left: solid white;
+    border-left: 5px; 
+}
+
+nav{
+    background-color: rgb(25, 22, 22);
+    display:flex;
+    flex-direction: row-reverse;
+    align-items: flex-start;
+    
+}
+
+
+
+p.cursive{
+    font-family: Brush Script MT, Brush Script Std, cursive;   
+    font-size: 40px;
+    color: white;
+    padding-left: 10px; 
+    padding-right: 800px;      
+    
+}
+
+.greater_area{
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    background-color: rgba(212, 181, 181, 0.86);
+    margin: 10px;
+    border-radius: 20px;
+}
+.image_area{
+    display: flex;
+    flex-direction: row;
+    padding: 5px;
+    margin: 5px;
+    width: 900px;
+}
+
+.image_item{
+    max-width:200px;
+    max-height: 300px;
+    margin:10px;
+}
+
+.bold_divider{
+    border-top: 2px solid grey;
+    margin:3px;
+    padding:30px;
+}
+
+.status{
+    margin:10px;
+    padding:30px;
+    border-radius: 20px;
+    background-color: rgb(192, 190, 187);
+}
+
+textarea{
+    border: solid;
+    border-radius: 20px;
+    border-color: rgb(8, 8, 38);
+    background-color: rgba(97, 97, 206, 0.607);
+    padding:10px;
+    margin: 10px;
+}
+
+#chat-message-input{
+    border: solid;
+    border-radius: 20px;
+    border-color: rgb(8, 8, 38);
+    background-color: rgba(129, 129, 146, 0.607);
+    padding:10px;
+    margin: 10px;
+} 
+
+.toolPic{
+    height:200px;
+    width:200px;
+}

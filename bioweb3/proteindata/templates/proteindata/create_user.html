@@ -1,0 +1,48 @@
+<!-- "All code below written by the student."
+
+Description of file: HTML FILE OF THE "ADD PROTEIN ENTRY" PAGE. -->
+
+<!DOCTYPE html>
+<html lang="en">
+    {% load bootstrap4 %}
+    <head>
+        {% bootstrap_css %}
+        {% bootstrap_javascript jquery='full' %}
+
+        <link rel="stylesheet" type="text/css" href="../../static/css/proteindata.css">
+    </head>
+    {% load bootstrap4 %}
+    <body>
+        <h2>Create User Account :</h2>
+        <!-- <a href ="/protein/">Add protein Entry</a> -->
+        <form action="/api/user/" method="post" class="form">
+            {% csrf_token %}
+            {% bootstrap_form form %}
+            <input type="submit" value="Submit">
+        </form>
+
+        <div class ="proteins_list_table">
+
+            <h1>List of users: {{ type }}</h1>
+            <table> 
+                <tr><th>User ID</th><th>user_name</th> <th>user_intro</th><th>password</th><th>Address</th><th>Photo</th></tr>
+               
+                {% for protein in master_users %} 
+                    <tr><td>{{ protein.user_id }}</td>
+                        <td>{{ protein.user_name }}</td>
+                        <td class="descript">{{ protein.user_intro }}</td>
+                        <td>{{ protein.password }}</td>
+                        <td>{{ protein.user_address.address_id }}</td>
+                        
+                        
+                        <td><img src="../../static/images/{{protein.user_photo}}.png" /></td>
+                    </tr> 
+                {% endfor %}
+            </table>
+
+        </div>
+
+
+    </body>
+    
+</html>

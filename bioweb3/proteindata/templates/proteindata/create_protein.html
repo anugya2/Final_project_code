@@ -1,0 +1,41 @@
+<!-- "All code below written by the student."
+
+Description of file: HTML FILE OF THE "ADD PROTEIN ENTRY" PAGE. -->
+
+<!DOCTYPE html>
+<html lang="en">
+    {% load bootstrap4 %}
+    <head>
+        {% bootstrap_css %}
+        {% bootstrap_javascript jquery='full' %}
+
+        <link rel="stylesheet" type="text/css" href="../../static/css/proteindata.css">
+    </head>
+    {% load bootstrap4 %}
+    <body>
+        <h2>ADD PROTEIN ENTRY:</h2>
+        <!-- <a href ="/protein/">Add protein Entry</a> -->
+        <form action="/api/protein/" method="post" class="form">
+            {% csrf_token %}
+            {% bootstrap_form form %}
+            <input type="submit" value="Submit">
+        </form>
+
+        <div class ="proteins_list_table">
+
+            <h1>List of proteins: {{ type }}</h1>
+            <table> 
+                <tr><th>Protein ID</th><th>Protein Length</th> <th>Taxonomy</th><th>Sequence</th></tr>
+               
+                {% for protein in master_proteins %} 
+                    <tr><td>{{ protein.protein_id }}</td><td>{{ protein.protein_length }}</td>
+                        <td>{{ protein.taxonomy.taxa_id }}</td><td>{{ protein.sequence }}</td></tr> 
+                {% endfor %}
+            </table>
+
+        </div>
+
+
+    </body>
+    
+</html>

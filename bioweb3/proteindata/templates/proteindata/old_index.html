@@ -1,0 +1,52 @@
+<!-- "All code below written by the student."
+
+Description of file: HTML FILE OF THE MAIN PAGE. -->
+
+<!DOCTYPE html>
+<html lang="en">
+    {% load bootstrap4 %}
+    <head>
+        {% bootstrap_css %}
+        {% bootstrap_javascript jquery='full' %}
+
+        <link rel="stylesheet" type="text/css" href="../../static/css/proteindata.css">
+    </head>
+    <body>
+        
+        <h2>Testing functionalities:</h2>
+        <br>
+        <h3>1. Add User/ Create your account:</h3>
+        <p><a href ="/api/user/">POST http://127.0.0.1:8000/api/user/ - add a new record</a></p>
+        <br>
+        <h3>2. Add Tools to share:</h3>
+        <p><a href ="api/tool/1">POST http://127.0.0.1:8000/api/tool/1/ -Add tools and items to share.
+        </a></p>
+        <br>
+        <h3>3. List all Tools in the inventory:</h3>
+        <p><a href ="api/toolList">POST http://127.0.0.1:8000/api/tool/1/ -Add tools and items to share.
+        </a></p>
+        <br>
+        <h3>4. Filtered inventory based on category:</h3>
+        <p><a href ="api/filter_tools/Sewing">POST http://127.0.0.1:8000/api/filter_tools/sewing -Filter inventory for sewing tools
+        </a></p>
+        <br>
+        <h3>5. Display only the tools in your account:</h3>
+        <p><a href ="api/filter_tools/Sewing">POST http://127.0.0.1:8000/api/filter_tools/sewing -Filter inventory for sewing tools
+        </a></p>
+        <br>
+        <h3>6. Add the tools in your account to inventory:</h3>
+        <p><a href ="api/filter_tools/Sewing">POST http://127.0.0.1:8000/api/filter_tools/sewing -Filter inventory for sewing tools
+        </a></p>
+        <br>
+
+        
+        <br>
+        <h3>Inventory list page:</h3>
+        <p><a href ="api/inventory_list_page/">The main page with all the tools and their status.
+        </a></p>
+        <br>
+        
+
+    </body>
+    
+</html>

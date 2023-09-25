@@ -1,0 +1,72 @@
+{% extends "./top.html" %}
+{% block content %}
+<div class="vertical">
+    <div class="search_area"> 
+        <h3>Filter tools based on categories: </h3>
+        <div class="horizontal">
+            {% for category in categories %}
+            <form id="category_search" method="post" action="/category_search/" enctype="multipart/form-data">  
+                {% csrf_token %}
+                <input type="hidden" name="category" value={{category}} size="56" />
+                <input style="margin:10px;" class="btn btn-dark" type="submit" name="submit" value={{category}} />
+            </form>  
+            {% endfor %}
+        </div>
+        {% if category_search_results != None %}
+            <h5 >{{ category_search_results.0.tool_category}} Tools:</h5>
+            <p ><b>Description:</b>{{category_search_results.0.tool_category.category_description}}</p>
+        {% endif %}
+        <div class="horizontal">
+            
+            {% for tool in category_search_results %}
+                    <div class="card" style="width: 18rem;">
+                        <img class="card-img-top" src="../..{{ tool.tool_photo.url|slice:'12:' }}">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ tool.tool_name}}</h5>
+                            <p class="card-text"><b>Description:</b> {{ tool.tool_description}}</p>
+                            <p class="card-text"><b>Category:</b> {{ tool.tool_category}}</p>
+                            <p class="card-text"><b>Owner:</b> {{ tool.tool_owner.user}}</p>
+                            <p class="card-text"><b>Tentative location:</b> {{ tool.tool_location.city}},{{ tool.tool_location.country}} </p>
+                            <form id="send_borrow_request" method="post" action="/send_borrow_request/" enctype="multipart/form-data">  
+                                {% csrf_token %}
+                                <input type="hidden" name="tool_id" value={{tool.tool_id}} size="56" />
+                                <input class="btn btn-dark" type="submit" name="submit" value="Send Borrow Request" />
+                            </form>
+                            
+                        </div>                  
+                    </div>                    
+                {% empty %}
+                    <p>No results found</p>                    
+            
+            {% endfor %}
+        </div>
+    </div>
+    <hr class="bold_divider">
+    <h3>All the hobby and craft tools in our website.</h3>
+    <div class="horizontal">
+        {% for tool in toolList %}
+                <div class="card" style="width: 18rem;">
+                    <img class="card-img-top" src="../..{{ tool.tool_photo.url|slice:'12:' }}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ tool.tool_name}}</h5>
+                        <p class="card-text"><b>Description:</b> {{ tool.tool_description}}</p>
+                        <p class="card-text"><b>Category:</b> {{ tool.tool_category}}</p>
+                        <p class="card-text"><b>Owner:</b> {{ tool.tool_owner.user}}</p>
+                        <p class="card-text"><b>Tentative location:</b> {{ tool.tool_location.city}},{{ tool.tool_location.country}} </p>
+                        <form id="send_borrow_request" method="post" action="/send_borrow_request/" enctype="multipart/form-data">  
+                            {% csrf_token %}
+                            <input type="hidden" name="tool_id" value={{tool.tool_id}} size="56" />
+                            <input class="btn btn-dark" type="submit" name="submit" value="Send Borrow Request" />
+                        </form>
+                        
+                    </div>                  
+                </div>                    
+            {% empty %}
+                <p>No results found</p>
+        {% endfor %}
+    </div>
+
+    
+</div>
+
+{% endblock %}

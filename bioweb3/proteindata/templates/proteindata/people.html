@@ -1,0 +1,26 @@
+<!-- # I wrote this code -->
+
+{% extends "./top.html" %}
+{% load bootstrap4 %}
+{% block content %}
+<!-- Search for people Area -->
+<div class="vertical">
+   
+
+    <h3>All the hobbyists in our website.</h3>
+    <div class="horizontal">
+        {% for people in master_users %}             
+            <div class="card" style="width: 18rem;">
+                <img class="card-img-top" src="../..{{ people.photo.url|slice:'12:' }}" >
+                <div class="card-body">
+                    <h5 class="card-title">{{ people.user}}</h5>
+                    <p class="card-text"><b>Status:</b> {{ people.status}}</p>
+                    
+                </div>                  
+            </div>            
+        {% endfor %}
+    </div>    
+</div>
+{% endblock %}
+
+<!-- # end of code I wrote  -->

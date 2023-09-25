@@ -1,0 +1,83 @@
+<!-- "All code below written by the student."
+
+Description of file: HTML FILE OF THE "ADD PROTEIN ENTRY" PAGE. -->
+
+<!DOCTYPE html>
+<html lang="en">
+    {% load bootstrap4 %}
+    <head>
+        {% bootstrap_css %}
+        {% bootstrap_javascript jquery='full' %}
+
+        <link rel="stylesheet" type="text/css" href="../../static/css/proteindata.css">
+    </head>
+    {% load bootstrap4 %}
+    <body class="weird">
+        
+        <central>
+        </central>
+        <header>
+            <nav>
+                <ul class="navigation">
+                    <li><a href='../../' style= "background-color:#86c7af; border-radius:5px; color:#f2ebe8; ">HOME</a></li>                    
+                    <li><a href="index.html">CONNECT</a></li>
+                    <li><a href="index.html">TOOLS</a></li>
+                    <li><a href="index.html">ACCOUNT</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            
+
+            <publ_content>
+
+                <h1>List of inventory items:</h1>
+
+                {% for invenItem in master_inventory %} 
+                    <presentation_block>
+                        <h3 class ="ppt_text">{{ invenItem.tool_id.tool_name }}</h3>
+                        <div class="photo_descrpt">
+                            <img class= "img_inventory" src="../../static/images/{{invenItem.tool_id.tool_photo}}.png" />
+                            
+                            <div class="vertical_div">
+                                <div class="horizontal_div">
+                                    <p class ="desription_text">Description:</p>
+                                    <p class ="desription_text">{{ invenItem.tool_id.tool_description }}</p>
+                                </div>
+                                <div class="horizontal_div">
+                                    <p class ="desription_text">Has it been picked up yet?:</p>
+                                    <p class ="desription_text">{{ invenItem.picked_up_status }}</p>
+                                </div>
+                                <div class="horizontal_div">
+                                    <p class ="desription_text">Owner's User name: </p>
+                                    <p class ="desription_text">{{ invenItem.owner_id.user_name }}</p>
+                                    <img  class="tiny_image" src="../../static/images/{{invenItem.owner_id.user_photo}}.png" />
+                                </div>
+                            </div>
+                              
+                            
+                            
+                            
+
+                        </div>
+                        
+                       
+
+                    </presentation_block>
+                    
+                {% endfor %}
+    
+                
+
+            </publ_content>
+            
+
+        </main>
+
+        
+
+
+    </body>
+    
+</html>

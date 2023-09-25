@@ -1,0 +1,43 @@
+<!-- # I wrote this code -->
+<!-- Main base page used in all templates -->
+<!DOCTYPE html>
+<html lang="en">        
+    {% load bootstrap4 %}
+    <head>
+        <meta charset="UTF-8">
+        <meta name="description" content="Toy Gene data website">
+        <meta name="keywords" content="HTML,gene,genes,advanced,web,development">
+        <meta name="author" content="D.Buchan">
+        {% bootstrap_css %}
+        {% bootstrap_javascript jquery='full' %}
+        <link rel="stylesheet" type="text/css" href="../../static/css/chat.css"> 
+    </head>
+    <body>
+        <div class="logoBar">  
+            <img src="../../static/images/logo.png" id="logo"  alt="friendship logo" >
+            <h1 id="application_title" >Tool Share App</h2>
+        </div>
+        <div class='innerBody'> 
+            {% if user.is_authenticated %}
+            <nav>
+                <li class="nav-item">
+                    <a class="nav-link" href="../logout/">| Logout<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../">Main<span class="sr-only">(current)</span></a>
+                </li>
+                   
+                <p class="cursive"> Hello {{ user.username }} !<span class="sr-only">(current)</span></p>
+                
+            </nav>
+            {% endif %}
+
+            {% block content %}
+
+            {% endblock %}
+
+        </innerBody>
+    </body> 
+</html>
+
+<!-- # end of code I wrote -->

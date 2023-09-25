@@ -1,0 +1,41 @@
+<!-- "All code below written by the student."
+
+Description of file: HTML FILE OF THE MAIN PAGE. -->
+
+<!DOCTYPE html>
+<html lang="en">
+    {% load bootstrap4 %}
+    <head>
+        {% bootstrap_css %}
+        {% bootstrap_javascript jquery='full' %}
+
+        <link rel="stylesheet" type="text/css" href="../../static/css/proteindata.css">
+    </head>
+    <body class= "frontPage">
+        <h2>REST API Endpoints:</h2>
+        <br>
+        <h3>1. Add Protein Entry:</h3>
+        <p><a href ="/api/protein/">POST http://127.0.0.1:8000/api/protein/ - add a new record</a></p>
+        <br>
+        <h3>2. Show Protein Details:</h3>
+        <p><a href ="api/protein/A0A016S8J7/">GET  http://127.0.0.1:8000/api/protein/[PROTEIN ID] - 
+            return the protein sequence and all we know about it:
+            "/api/protein/A0A016S8J7"
+        </a></p>
+        <br>
+        <h3>3. Show Domain Details:</h3>
+        <p><a href ="api/pfam/PF00360/">GET  http://127.0.0.1:8000/api/pfam/[PFAM ID] - return the domain and it's description: "api/pfam/PF00360/"</a></p>
+        <br>
+        <h3>4. Return a list of all proteins for a given organism:</h3>
+        <p><a href ="api/proteins/55661/">GET  http://127.0.0.1:8000/api/proteins/[TAXA ID] : "api/proteins/55661/"</a></p>
+        <br>
+        <h3>5. Return a list of all domains in all the proteins for a given organism.</h3>
+        <p><a href ="api/pfams/55661/">GET  http://127.0.0.1:8000/api/pfams/55661 : "api/pfams/55661/"</a></p>
+        <br>
+        <h3>6. Return the domain coverage for a given protein.</h3>
+        <p><a href ="api/coverage/A0A016S8J7/">GET  http://127.0.0.1:8000/api/coverage/[PROTEIN ID] : "api/coverage/A0A016S8J7/"</a></p>
+        <br>
+
+    </body>
+    
+</html>

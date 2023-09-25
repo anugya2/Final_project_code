@@ -1,0 +1,78 @@
+<!-- # I wrote this code -->
+{% extends './top.html' %}
+{% block content %}
+    
+    {% if user.is_authenticated %}    
+    <div class="memories_area">
+        <div class="horizontal">  
+            <div class="card" style="width: 18rem;">
+                <img class="card-img-top" src="../../static/images/home_card.png" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">Personal Dashboard</h5>
+                    <p class="card-text">Your account, profile and tools and groups you are in.</p>
+                    <a href="../home/" class="btn btn-dark">Home</a>
+                </div>                  
+            </div>    
+            <div class="card" style="width: 18rem;">
+                <img class="card-img-top" src="../../static/images/people.png" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">Fellow Hobbyist</h5>
+                    <p class="card-text">Find fellow hobbyists and form a network of hobby-friends.</p>
+                    <a href="../people/" class="btn btn-dark">Friends</a>
+                </div>                  
+            </div>
+            <div class="card" style="width: 18rem;">
+                <img class="card-img-top" src="../../static/images/tools.png" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">Tools Arena</h5>
+                    <p class="card-text">Give up tools for sharing or borrow from others.</p>
+                    <a href="../inventory/" class="btn btn-dark">Inventory</a>
+                </div>                  
+            </div>
+            
+        </div>
+    </div>
+    
+    {% else %}
+    <div class="horizontal">  
+        <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="../../static/images/register_card.png" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title">Register</h5>
+                <p class="card-text">Register and start sharing your hobby and craft tools. Connect with other hobbyist</p>
+                <a href="../register/" class="btn btn-dark">Register here</a>
+            </div>                  
+        </div>    
+        <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="../../static/images/login_card.png" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title">Login</h5>
+                <p class="card-text">If you are already registered, start sharing your hobby and craft tools. Connect with other hobbyist</p>
+                <a href="../login/" class="btn btn-dark">Login here</a>
+            </div>                  
+        </div>
+    </div>
+    {% endif %}
+{% endblock %}
+
+<!-- # end of code I wrote  -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

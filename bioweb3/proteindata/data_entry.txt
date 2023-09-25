@@ -1,0 +1,37 @@
+{
+    "protein_id": "AAAAAAAAA9",
+    "protein_length": 10,
+    "sequence": "MVI",
+    "taxonomy": {
+        "taxa_id": 53326,
+        "clade": "E",
+        "genus": "Ancylostoma",
+        "species": "ceylanicum"
+    },
+    "domains": [
+        {
+            "domain_start": 1,
+            "domain_end": 2,
+            "domain_id": {
+                "domain_id": "BBBAAAA",
+                "domain_description": "descriptaseinase",
+                "pfam_link": {
+                    "pfam_id": "BBBAAAA",
+                    "pfam_description": "descriptaseinase"
+                }
+            }
+        },
+        {
+            "domain_start": 2,
+            "domain_end": 3,
+            "domain_id": {
+                "domain_id": "AF0AAAB",
+                "domain_description": "Neurotransrterase",
+                "pfam_link": {
+                    "pfam_id": "AF0AAAB",
+                    "pfam_description": "Neurotransrterase"
+                }
+            }
+        }
+    ]
+}

@@ -1,0 +1,234 @@
+<!-- # I wrote this code -->
+<!-- ../../../images/juniper_profile_pic.png -->
+<!-- Home page of user -->
+{% extends "./top.html" %}
+{% block content %}
+
+<!-- just for the images -->
+<script>
+    setInterval(function() {    
+    const req = new XMLHttpRequest();        
+    req.onreadystatechange = function(){
+        if (req.readyState === 4) {            
+            html = "";
+            data = JSON.parse(req.response)    
+            if (data.user.username == "{{user.username}}"){                 
+                html += "<img class='card-img-top'style='width: 270px' src='../.."+ (String(data.photo)).substring(33) +"' >";
+                html += "<div class='card-body'>";
+                html += "<h5 class='card-title'>"+ data.user.username +"</h5>";
+                html += "<p class='card-text'><b>Organization: </b>"+ data.organisation +"</p>";                
+                html += "<p class='card-text'><b>Status: </b>"+ data.status +"</p>";
+                html += "<p class='card-text'><b>Address: </b>"+ data.user_address.city +", "+ data.user_address.country +"</p></div> ";                
+            };                
+            document.getElementById("profile_card").innerHTML = html ;     
+
+        }            
+    };
+    req.open("GET", "/api/userData/{{pk}}");    
+    req.send();    
+    }, 2000);
+</script>
+
+<div class="vertical" >    
+    <h2>Home Page:</h2>
+    
+    <div class="horizontal" > 
+        <div class="vertical">    
+            <div class="card"  id ="profile_card">            
+                <div class="card-body">
+                    <h5 class="card-title">{{user_name}}</h5>
+                    <p class="card-text"><b>This is a new oneee:</b> {{user_organisation}}</p>
+                    <p class="card-text"><b>Status:</b> {{user_status}}</p>            
+                </div>                  
+            </div>
+            <div class="card"  id ="profile_card">            
+                <div class="card-body">
+                    <h5 class="card-title">Add hobby/craft categories to the website:</h5>
+                    <form id="category_form" method="post" action="/add_category/" enctype="multipart/form-data">  
+                        {% csrf_token %}
+                        {{ categoryForm.as_p }}              
+                        <input class="btn btn-dark" type="submit" name="submit" value="Add category" />
+                    </form>            
+                </div>                  
+            </div>
+        </div> 
+
+        <div class="vertical" style="width: 1500px">               
+            <div class="greater_area" >
+                <h3>Your tools:</h3>
+                <div class="horizontal">
+                    {% for tool in userToolList %} 
+                        <div class="vertical"   >           
+                            <img class="toolPic" src="../..{{ tool.tool_photo.url|slice:'12:' }}">                
+                            <p>{{ tool.tool_name }}</p>
+                            <form id="delete" method="post" action="/delete/" enctype="multipart/form-data">  
+                                {% csrf_token %} 
+                                <input type="hidden" name="tool_id" value={{tool.tool_id}} />           
+                                <input class="btn btn-secondary btn-sm" type="submit" name="submit" value="Delete" />
+                            </form> 
+                        </div> 
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="card" id ="profile_card">            
+                <div class="card-body">
+                    <h5 class="card-title">Upload Tools:</h5>
+                    <form id="tool_form" method="post" action="/add_tool/" enctype="multipart/form-data">  
+                        {% csrf_token %}
+                        {{ toolForm.as_p }}  
+                        {{ addressForm.as_p }}             
+                        <input class="btn btn-dark" type="submit" name="submit" value="Add tools" />
+                    </form>            
+                </div>                  
+            </div> 
+        </div>
+
+    </div>
+    <!-- //3 upload forms -->
+    <div class="card" id ="profile_card">            
+        <div class="card-body">
+            <h5 class="card-title">Change Account Details:</h5>
+            <p class="status_1"><b>Status:</b> </p>
+        <form id="status_form" method="post" action="/update_status/">  
+            {% csrf_token %}
+            <div class="horizontal">
+                <p style="width:110px">Status: </p>
+                <input type="text" name="status" value="" size="60" />     
+                <input style="margin-left: 15px;" class="btn btn-dark" type="submit" value="Update status" />
+            </div>
+        </form>
+        <hr>
+        <p class="organisation_1"><b>Organisation:</b></p>
+        <form id="organisation_form" method="post" action="/update_organisation/">  
+            {% csrf_token %}
+            <div class="horizontal">
+                <p style="width:110px">Organisation: </p>
+                <input type="text" name="organisation" value="" size="60" />     
+                <input class="btn btn-dark" style="margin-left: 15px;" type="submit" value="Update organisation" />
+            </div>
+        </form>
+        <hr>
+        <p class="address_1"><b>Address:</b> </p>
+        <form id="address_form" method="post" action="/update_address/">  
+            {% csrf_token %}
+            <div class="horizontal">
+                <p style="width:110px">Home no:</p> 
+                <input type="text" name="home_no" value="" size="60" />
+            </div>
+            <div class="horizontal">
+                <p style="width:110px">Street:</p> 
+                <input type="text" name="street" value="" size="60" />
+            </div>
+            <div class="horizontal">
+                <p style="width:110px">City:</p> 
+                <input type="text" name="city" value="" size="60" />
+            </div>             
+            <input class="btn btn-dark" type="submit" value="Update address" />            
+            
+            <br> 
+        </form>
+        <hr>
+        <p class="photo_1"><b>Profile picture:</b> </p>
+        <form id="photo_form" method="post" action="/update_photo/" enctype="multipart/form-data">  
+            {% csrf_token %}
+            {{ photoForm.as_p }}              
+            <input class="btn btn-dark" type="submit" name="submit" value="Update photo" />
+        </form>
+        <hr>
+                       
+        </div>                  
+    </div>
+        
+
+    </div>
+
+    
+
+    <!-- People/ Friends section--> 
+    <hr class="bold_divider">  
+    <h2>Pending Borrow requests for your tools:</h2>
+    <div class="horizontal">
+        {% for tuple in tool_request_tuple_list %} 
+            <div class="card " style="width: 12rem; border-color: blue;">
+                <img class="card-img-top" src="../..{{ tuple.1.borrower.photo.url|slice:'12:' }}" >
+                <div class="card-body">
+                    <h5 class="card-title">{{ tuple.1.borrower.user.username }}</h5>
+                    <p class="card-text"><b>Acceptance status:</b>{{tuple.1.acceptance_status}}</p>
+                    <p class="card-text"><b>Tool requested:</b>{{tuple.0.tool_name}}</p>
+                    <img class="card-img-top" src="../..{{ tuple.0.tool_photo.url|slice:'12:' }}" >
+                    <form id="request_acceptance_form" method="post" action="/request_acceptance/">
+                        {% csrf_token %}                         
+                        <input type="hidden" name="request_id" value={{tuple.1.request_id}} size="56" />
+                        <button class="btn btn-dark">Accept Borrow request</button>
+                    </form>
+                </div>                  
+            </div> 
+        {% endfor %}
+    </div>
+    <hr class="bold_divider"> 
+    <h2>Chat and arrange pick up: </h2>
+    <div class="horizontal">
+        {% for tuple in accepted_tool_borrowRequest_list %} 
+            <div class="card " style="width: 12rem; border-color: rgb(115, 255, 0);">
+                <img class="card-img-top" src="../..{{ tuple.1.borrower.photo.url|slice:'12:' }}" >
+                <div class="card-body">
+                    <h5 class="card-title">{{ tuple.1.borrower.user.username }}</h5>
+                    <p class="card-text"><b>Tool requested:</b>{{tuple.0.tool_name}}</p>
+                    <p class="card-text"><b>Location:</b>{{tuple.1.tool_id.tool_location.street}}</p>
+                    <img class="card-img-top" src="../..{{ tuple.0.tool_photo.url|slice:'12:' }}" >
+                                             
+                    <input id="room-name-input" type="hidden" value={{tuple.1.request_id}} size="100"><br>
+                    <input id="room-name-submit" class="btn btn-dark" type="button" value="Chat with {{ tuple.1.borrower.user.username }}">
+                    
+                </div>                  
+            </div> 
+        {% endfor %}
+        {% for request in accepted_outgoing_request_list %} 
+            <div class="card " style="width: 12rem; border-color: blue;">
+                <img class="card-img-top" src="../..{{ request.tool_id.tool_owner.photo.url|slice:'12:' }}" >
+                <div class="card-body">
+                    <h5 class="card-title">Owner:{{ request.tool_id.tool_owner.user.username }}</h5>
+                    <p class="card-text"><b>Tool requested:</b>{{request.tool_id.tool_name}}</p>
+                    <p class="card-text"><b>Acceptance status:</b>{{tuple.1.acceptance_status}}</p>
+                    <img class="card-img-top" src="../..{{ request.tool_id.tool_photo.url|slice:'12:' }}" >                    
+                    <input id="room-name-input" type="hidden" value={{request.request_id}} size="100"><br>
+                    <input id="room-name-submit" class="btn btn-dark" type="button" value="Chat with {{request.tool_id.tool_owner.user.username}}">
+                    
+                </div>                  
+            </div> 
+        {% endfor %}
+        
+        
+    </div>
+
+    <hr class="bold_divider">
+    <h2>Pending borrow requests sent by you:</h2>
+    {% for request in pending_outgoing_request_list %} 
+        <div class="card " style="width: 6rem; border-color: orange;">
+            <img class="card-img-top" src="../..{{ request.tool_id.tool_photo.url|slice:'12:' }}" >
+            <div class="card-body">
+                <h6 class="card-title">{{ request.tool_id.tool_name}}</h6>                   
+            </div>                  
+        </div> 
+    {% endfor %}
+
+    
+    
+    
+    <script>
+        document.querySelector('#room-name-input').focus();
+        document.querySelector('#room-name-input').onkeyup = function(e) {
+            if (e.keyCode === 13) {  // enter, return
+                document.querySelector('#room-name-submit').click();
+            }
+        };
+        document.querySelector('#room-name-submit').onclick = function(e) {
+            var roomName = document.querySelector('#room-name-input').value;            
+            window.location.pathname = '/chat/' + roomName + '/';
+        };
+    </script> 
+
+</div>
+
+{% endblock %}
+
